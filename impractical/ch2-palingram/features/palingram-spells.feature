@@ -12,7 +12,6 @@ Feature: Palingram Spell Generator
       Then the system returns a multi-word phrase
       And it is identical when all characters are reversed
       And it is unique for each request
-      And it starts with the text "Jeff"
 
    @other @wip
    Scenario: User submits a post to the service

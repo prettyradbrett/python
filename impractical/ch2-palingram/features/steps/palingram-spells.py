@@ -24,8 +24,8 @@ def step_impl(context):
 @then(u'it is identical when all characters are reversed')
 def step_impl(context):
     for r in context.responses:
-        original = r.text
-        reversed = r.text[::-1]
+        original = r.text.replace(" ", "")
+        reversed = r.text[::-1].replace(" ", "")
         assert original == reversed
 
 @when(u'the user submits a post')
@@ -52,7 +52,3 @@ def step_impl(context):
         response_texts.append(r.text)
 
     assert len(response_texts) == len(set(response_texts))
-
-@then(u'it starts with the text "Jeff"')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then it starts with the text "Jeff"'
