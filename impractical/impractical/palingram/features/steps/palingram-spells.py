@@ -1,3 +1,4 @@
+# pylint: disable=E0102, no-name-in-module
 from behave import given, when, then
 import requests
 from flask import jsonify

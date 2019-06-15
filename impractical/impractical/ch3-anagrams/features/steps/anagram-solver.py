@@ -1,4 +1,5 @@
-from behave import given, when, then
+# pylint: disable=E0102, no-name-in-module
+from behave import given, when, then 
 import requests
 from flask import jsonify
 
@@ -14,12 +15,18 @@ def step_impl(context):
 @when(u'I input "{keyword}"')
 def step_impl(context, keyword):
     context.responses = []
-    context.responses.append(requests.get(url = SERVICE_URL + '/' + keyword, params = PARAMS))
+    context.responses.append(requests.get(url = SERVICE_URL + '/' + keyword.lower(), params = PARAMS))
 
 @then(u'the result should contain "{result}"')
 def step_impl(context, result):
     for r in context.responses:
-        assert result in r.text
+        assert result.lower() in r.text
+
+@when(u'I provide "{input}" as input')
+def step_impl(context, input):
+    context.responses = []
+    context.responses.append(requests.get(url = SERVICE_URL + '/' + input.lower().replace(" ", "_"), params = PARAMS))
+
 
 """
 @when(u'the user requests a palingram')
